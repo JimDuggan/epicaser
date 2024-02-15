@@ -1,0 +1,71 @@
+---
+output: github_document
+title:  Generating a forecast from synthetic data
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+The first step (after installing the package) is to load the library `epismthr`, along with other packages as shown below.
+
+```{r,echo=T,message=FALSE}
+library(epismthr)
+library(ggplot2)
+library(dplyr)
+library(fable)
+```
+
+Use the function `generate_cases()` to generate synthetic data, so that we can test the forecasting algorithm.
+
+```{r,echo=T}
+all_data <- generate_cases()
+all_data
+```
+
+
+Get data from an earlier part of the epi curve in order to run a test.
+```{r,echo=T}
+test_data <- all_data %>%
+  filter(Date <= as.Date("2023-10-24"))
+```
+
+Plot the SEIR model output and the generated data.
+```{r,,echo=T}
+ggplot(test_data,aes(x=Date,y=Cases))+
+  geom_line()+
+  geom_point()+
+  geom_line(aes(y=Model),colour="red")+
+  scale_x_date(date_breaks = "1 week", minor_breaks = "1 day",date_labels="%b %e")
+```
+
+Call the function `epi_forecast()` to generate the forecast, with a look-ahead duration of seven days. A list containing result data is returned.
+
+```{r,echo=TRUE}
+result <- epi_forecast(test_data,
+                       look_ahead = 5)
+```
+
+First, we can plot the forecast.
+
+```{r,echo=TRUE}
+result$plot_fcast
+```
+
+Next, we can plot information on the overall fit.
+```{r,echo=TRUE}
+result$plot_comp
+```
+
+We can also access the forecast values and the confidence intervals.
+
+```{r,echo=TRUE}
+result$hilo
+```
+
+
+And display the training set accuracy measures.
+
+```{r,echo=TRUE}
+result$ts_accuracy
+```

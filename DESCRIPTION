@@ -1,0 +1,19 @@
+Package: epicaser
+Type: Package
+Title: Package to generate arrival of epi cases for queuing models
+Version: 0.1.0
+Authors@R: 
+    person(given = "Jim",
+           family = "Duggan",
+           role = c("aut", "cre"),
+           email = "jim.duggan@universityofgalway.ie",
+           comment = c(ORCID = "0000-0002-7507-8617"))
+Maintainer: The package maintainer <jim.duggan@universityofgalway.ie>
+Description: Utility to support model integration activities in RAPIDE project
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports: dplyr,
+         deSolve,
+         purrr 
+RoxygenNote: 7.2.3
