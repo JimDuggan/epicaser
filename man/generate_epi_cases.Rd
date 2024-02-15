@@ -8,6 +8,7 @@ generate_epi_cases(
   N = 1e+05,
   R0 = 2,
   I0 = 1,
+  rep_fraction = 0.5,
   res_policy = FALSE,
   res_duration = 7,
   end_time = 100,
@@ -24,6 +25,8 @@ generate_epi_cases(
 \item{R0}{the value for the reproduction number (default 2.0)}
 
 \item{I0}{the initial number of people infected (default 1)}
+
+\item{rep_fraction}{Reporting fraction for surveillance (default 0.5)}
 
 \item{res_policy}{Whether or not to activate a simple restrictions policy (default FALSE)}
 

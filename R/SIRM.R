@@ -22,8 +22,8 @@ sirm <- function(time, stocks, auxs){
     dM_dt     <- (Mobility_Goal-M)/Mobility_AT
     dTI_dt    <- lambda * S * Reporting_Fraction
     dRI_dt    <- (dTI_dt - RI)/Reporting_AT
-    if(RS == 0 & RI >= Activation_Threshold){
-          dRS_dt_in <- Restrictions_Policy*1/DT
+    if(RS == 0 & RI >= Activation_Threshold & Restrictions_Policy==1){
+          dRS_dt_in <- 1/DT
           TIME_START <<- time
      } else dRS_dt_in <- 0
     
@@ -56,6 +56,7 @@ sirm <- function(time, stocks, auxs){
 run_sim_sirm <- function(N=100000,
                          R0=2.0,
                          I0=1,
+                         rep_fraction=0.5,
                          res_policy=FALSE,
                          res_duration=7,
                          act_percentage=0.015,
@@ -83,7 +84,7 @@ run_sim_sirm <- function(N=100000,
                Activation_Percentage=act_percentage,
                Restrictions_Policy=as.integer(res_policy),
                Restrictions_Duration=res_duration,
-               Reporting_Fraction=0.5,
+               Reporting_Fraction=rep_fraction,
                Reporting_AT=2,
                Mobility_AT=2,
                DT=0.125)

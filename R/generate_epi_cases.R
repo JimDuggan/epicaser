@@ -9,6 +9,7 @@ library(purrr)
 #' @param N the population size for the SIR model (default 100000)
 #' @param R0 the value for the reproduction number (default 2.0)
 #' @param I0 the initial number of people infected (default 1)
+#' @param rep_fraction Reporting fraction for surveillance (default 0.5)
 #' @param res_policy Whether or not to activate a simple restrictions policy (default FALSE)
 #' @param res_duration Duration for restrictions (default 7)
 #' @param end_time end of simulation time (default 100)
@@ -22,6 +23,7 @@ library(purrr)
 generate_epi_cases <- function(N=100000,
                                R0=2.0,
                                I0=1,
+                               rep_fraction=0.5,
                                res_policy=FALSE,
                                res_duration=7,
                                end_time=100,
@@ -35,6 +37,7 @@ generate_epi_cases <- function(N=100000,
   sim <- run_sim_sirm(N=N,
                       R0=R0,
                       I0=I0,
+                      rep_fraction=rep_fraction,
                       res_policy=res_policy,
                       res_duration=res_duration,
                       end_time=end_time)

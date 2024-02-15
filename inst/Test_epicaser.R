@@ -3,7 +3,7 @@ library(epicaser)
 library(ggplot2)
 library(dplyr)
 
-cases <- generate_epi_cases(R0 = 2,Poisson = FALSE,nb_size = 10,res_policy = T,res_duration = 10)
+cases <- generate_epi_cases()
 
 
 ggplot(cases,aes(x=Date,y=Cases))+
