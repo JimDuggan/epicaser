@@ -1,9 +1,6 @@
 library(deSolve)
 library(dplyr)
 
-TIME_START <<- 1000 # Needed for restrictions logic
-TIME_END   <<- -1 # Needed for restrictions logic
-
 sirm <- function(time, stocks, auxs){
   with(as.list(c(stocks, auxs)),{
     # Parameters: R0, Recovery_Delay, Minimum_Mobility, N
@@ -64,6 +61,9 @@ run_sim_sirm <- function(N=100000,
                          act_percentage=0.015,
                          start_time=0,
                          end_time=100){
+  
+  TIME_START <<- 1000 # Needed for restrictions logic
+  TIME_END   <<- -1 # Needed for restrictions logic
 
   simtime <- seq(start_time,end_time,by=0.125)
   
