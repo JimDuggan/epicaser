@@ -22,6 +22,10 @@ sirm <- function(time, stocks, auxs){
     dM_dt     <- (Mobility_Goal-M)/Mobility_AT
     dTI_dt    <- lambda * S * Reporting_Fraction
     dRI_dt    <- (dTI_dt - RI)/Reporting_AT
+    
+    dAS_dt    <- -lambda * AS - staff_absenteeism * AS + UAS/staff_recovery_delay
+    dUAS_dt   <- lambda * AS + staff_absenteeism * AS - UAS/staff_recovery_delay
+    
     if(RS == 0 & RI >= Activation_Threshold & Restrictions_Policy==1){
           dRS_dt_in <- 1/DT
           TIME_START <<- time
@@ -41,12 +45,15 @@ sirm <- function(time, stocks, auxs){
                    dM_dt,
                    dTI_dt,
                    dRI_dt,
-                   dRS_dt),
+                   dRS_dt,
+                   dAS_dt,
+                   dUAS_dt),
                  TS=TIME_START,
                  TE=TIME_END,
                  auxs,
                  IR=lambda * S,
-                 RR=I/Recovery_Delay))
+                 RR=I/Recovery_Delay,
+                 CheckStaff=AS+UAS))
   })
 }
 
@@ -61,7 +68,10 @@ run_sim_sirm <- function(N=100000,
                          res_duration=7,
                          act_percentage=0.015,
                          start_time=0,
-                         end_time=100){
+                         end_time=100,
+                         staff_per_100K=1200,
+                         staff_recovery_delay=6,
+                         staff_absenteeism=0.02){
   
   TIME_START <<- 1000 # Needed for restrictions logic
   TIME_END   <<- -1 # Needed for restrictions logic
@@ -75,7 +85,10 @@ run_sim_sirm <- function(N=100000,
                M=1,
                TI=0,
                RI=0,
-               RS=0)
+               RS=0,
+               AS=N/100000*staff_per_100K*(1-0.02),
+               UAS=N/100000*staff_per_100K*(0.02))
+
 
   auxs    <- c(N=N,
                R0=R0,
@@ -87,8 +100,10 @@ run_sim_sirm <- function(N=100000,
                Reporting_Fraction=rep_fraction,
                Reporting_AT=2,
                Mobility_AT=2,
-               DT=0.125)
-  
+               DT=0.125,
+               staff_absenteeism=staff_absenteeism,
+               staff_recovery_delay=staff_recovery_delay)
+
   # Note we add on daily cases as a lagged difference of 1/step between cumulative cases
   res <- deSolve::ode(y=stocks,
                       times=simtime,

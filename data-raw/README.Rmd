@@ -19,7 +19,9 @@ library(fable)
 Use the function `generate_cases()` to generate synthetic data, so that we can test the forecasting algorithm.
 
 ```{r,echo=T}
-all_data <- generate_cases()
+all_data <- generate_epi_cases(staff_per_100K = 1200,
+                               staff_recovery_delay = 6,
+                               staff_absenteeism = 0.03)
 all_data
 ```
 
