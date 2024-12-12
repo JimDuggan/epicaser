@@ -70,9 +70,10 @@ generate_epi_cases <- function(N=100000,
                         Date=day_1+(Day-1),
                         Model=sim$DI,
                         Cases=syn_cases,
+                        AvailableStaff=syn_available_staff,
                         Model_Available_Staff=sim$AS,
-                        Model_Unavailable_Staff=sim$UAS,
-                        AvailableStaff=syn_available_staff)
+                        Model_Unavailable_Staff=sim$UAS)
+
   
   res
 
