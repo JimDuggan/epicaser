@@ -2,7 +2,8 @@
 % Please edit documentation in R/generate_epi_cases.R
 \name{generate_epi_cases}
 \alias{generate_epi_cases}
-\title{Creates synthetic epi data using SIR model and Poisson/Negative Binomial}
+\title{Creates synthetic epi data using SIR model and Poisson/Negative Binomial
+Staff absenteeism is proportional to the population attack rate (lambda)}
 \usage{
 generate_epi_cases(
   N = 1e+05,
@@ -16,7 +17,10 @@ generate_epi_cases(
   seed = FALSE,
   seed_val = 100,
   Poisson = TRUE,
-  nb_size = 10
+  nb_size = 10,
+  staff_per_100K = 1200,
+  staff_recovery_delay = 6,
+  staff_absenteeism = 0.02
 )
 }
 \arguments{
@@ -41,9 +45,15 @@ generate_epi_cases(
 \item{seed_val}{value of seed (default 100)}
 
 \item{nb_size}{size parameter for negative binomial distribution (default 10)}
+
+\item{staff_per_100K}{number of staff resources per 100K of population}
+
+\item{staff_recovery_delay}{average recovery time for absent staff}
+
+\item{staff_absenteeism}{average absenteeism rate for staff}
 }
 \value{
-res a tibble with day number, date, model output and cases
+res a tibble with day number, date, model output, cases, and available staff
 }
 \description{
 \code{generate_epi_cases} Create synthetic case data based on SIR model (Novel Pathogen)

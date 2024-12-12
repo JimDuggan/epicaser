@@ -1,73 +1,46 @@
 ---
 output: github_document
-title:  Generating a forecast from synthetic data
+title:  Showing how to generate cases and staff numbers
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-The first step (after installing the package) is to load the library `epismthr`, along with other packages as shown below.
+The first step (after installing the package) is to load the library `epicaser`
 
 ```{r,echo=T,message=FALSE}
-library(epismthr)
+library(epicaser)
 library(ggplot2)
 library(dplyr)
-library(fable)
 ```
 
-Use the function `generate_cases()` to generate synthetic data, so that we can test the forecasting algorithm.
+
+Use the function `generate_epi_cases()` to generate synthetic data, so that we can test the model.
 
 ```{r,echo=T}
-all_data <- generate_epi_cases(staff_per_100K = 1200,
+cases <- generate_epi_cases(staff_per_100K = 1200,
                                staff_recovery_delay = 6,
                                staff_absenteeism = 0.03)
-all_data
+cases
 ```
 
+Plot the cases
 
-Get data from an earlier part of the epi curve in order to run a test.
-```{r,echo=T}
-test_data <- all_data %>%
-  filter(Date <= as.Date("2023-10-24"))
-```
-
-Plot the SEIR model output and the generated data.
-```{r,,echo=T}
-ggplot(test_data,aes(x=Date,y=Cases))+
+```{r}
+ggplot(cases,aes(x=Date,y=Cases))+
   geom_line()+
   geom_point()+
-  geom_line(aes(y=Model),colour="red")+
-  scale_x_date(date_breaks = "1 week", minor_breaks = "1 day",date_labels="%b %e")
+  scale_x_date(date_breaks = "1 week", minor_breaks = "1 day",date_labels="%b %e")+
+  ggtitle("Cases")
 ```
 
-Call the function `epi_forecast()` to generate the forecast, with a look-ahead duration of seven days. A list containing result data is returned.
+Plot the staff numbers. These are Poisson random variables with the mean taken from the ODE model.
+```{r}
 
-```{r,echo=TRUE}
-result <- epi_forecast(test_data,
-                       look_ahead = 5)
-```
-
-First, we can plot the forecast.
-
-```{r,echo=TRUE}
-result$plot_fcast
-```
-
-Next, we can plot information on the overall fit.
-```{r,echo=TRUE}
-result$plot_comp
-```
-
-We can also access the forecast values and the confidence intervals.
-
-```{r,echo=TRUE}
-result$hilo
-```
-
-
-And display the training set accuracy measures.
-
-```{r,echo=TRUE}
-result$ts_accuracy
+ggplot(cases,aes(x=Date,y=cases$AvailableStaff))+
+  geom_line()+
+  geom_point()+
+  scale_x_date(date_breaks = "1 week", minor_breaks = "1 day",date_labels="%b %e")+
+  ggtitle("Available Staff")
 ```

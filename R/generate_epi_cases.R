@@ -18,10 +18,10 @@ library(purrr)
 #' @param seed True or False for using a seed (default FALSE)
 #' @param seed_val value of seed (default 100)
 #' @param nb_size size parameter for negative binomial distribution (default 10)
-#' @param staff_per_100K number of staff resources oer 100K of population
+#' @param staff_per_100K number of staff resources per 100K of population
 #' @param staff_recovery_delay average recovery time for absent staff
 #' @param staff_absenteeism average absenteeism rate for staff
-#' @return res a tibble with day number, date, model output and cases
+#' @return res a tibble with day number, date, model output, cases, and available staff
 #' @export
 
 generate_epi_cases <- function(N=100000,

@@ -18,5 +18,6 @@ ggplot(cases,aes(x=Date,y=Cases))+
 ggplot(cases,aes(x=Date,y=cases$AvailableStaff))+
   geom_line()+
   geom_point()+
+  geom_line(data=cases,mapping=aes(x=Date,y=Model_Available_Staff),colour="red")+
   scale_x_date(date_breaks = "1 week", minor_breaks = "1 day",date_labels="%b %e")+
   ggtitle("Available Staff")
