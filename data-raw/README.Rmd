@@ -20,8 +20,8 @@ Use the function `generate_epi_cases()` to generate synthetic data, so that we c
 
 ```{r,echo=T}
 cases <- generate_epi_cases(staff_per_100K = 1200,
-                               staff_recovery_delay = 6,
-                               staff_absenteeism = 0.03)
+                            staff_recovery_delay = 6,
+                            staff_absenteeism = 0.03)
 cases
 ```
 
@@ -42,5 +42,7 @@ ggplot(cases,aes(x=Date,y=cases$AvailableStaff))+
   geom_line()+
   geom_point()+
   scale_x_date(date_breaks = "1 week", minor_breaks = "1 day",date_labels="%b %e")+
-  ggtitle("Available Staff")
+  ggtitle("Available Staff")+
+  ylab("Available Staff")+
+  xlab("Time")
 ```
