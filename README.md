@@ -1,15 +1,15 @@
 # epicaser
-A package to generate an epi case signal for input to queuing models. 
+A package to generate an epi case signal (based on an SIR model) for input to queuing models. 
 
-Also generate values for the number of available resources (e.g. Nurses).
+It also generate values for the number of available healthcare resources, which deplete in proportion to the attack rate of the pathogen.
 
-To see how the code works, [click here](https://github.com/JimDuggan/epicaser/tree/main/data-raw)
 
 To install the package, type the following code:
-
 ```
 devtools::install_github("JimDuggan/epicaser")
 ```
+
+To see how to use the package, [click here](https://github.com/JimDuggan/epicaser/tree/main/data-raw)
 
 Code examples can be seen [here](https://github.com/JimDuggan/epicaser/tree/main/inst)
 
@@ -21,6 +21,13 @@ Code examples can be seen [here](https://github.com/JimDuggan/epicaser/tree/main
 ### Project Information
 
 This work is part of the [RAPIDE Project](https://www.rapideproject.eu) Work Package 3 (Forecasting and planning of patients and resources over the healthcare chain).
+
+Project Details:
+
+* **Project No.** 101136348
+* **EC Contribution:** Euro 5,916,977.50
+* **Duration:** 48 months
+* **Start date:** 1 January 2024
 
 RAPIDE is funded by the European Union’s Horizon Europe Research and Innovation programme, with the following partners.
 
