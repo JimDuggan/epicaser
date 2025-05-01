@@ -1,5 +1,5 @@
-library(dplyr)
-library(purrr)
+library(tidyverse)
+library(crayon)
 
 #-------------------------------------------------------------------------------------
 #' Creates synthetic epi data using SIR model and Poisson/Negative Binomial
@@ -31,7 +31,7 @@ generate_epi_cases <- function(N=100000,
                                res_policy=FALSE,
                                res_duration=7,
                                end_time=100,
-                               start_day="2024-03-01",
+                               start_day="2025-03-01",
                                seed=FALSE,
                                seed_val=100,
                                Poisson=TRUE,
@@ -41,6 +41,7 @@ generate_epi_cases <- function(N=100000,
                                staff_absenteeism=0.02){
   
   
+  cat(green("Calling generate_epi_cases to run SIR model and generate data...\n"))
   sim <- run_sim_sirm(N=N,
                       R0=R0,
                       I0=I0,

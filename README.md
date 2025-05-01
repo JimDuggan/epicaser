@@ -1,8 +1,9 @@
 # epicaser
-A package to generate an epi case signal (based on an SIR model) for input to queuing models. 
+A package to generate an epi case signal (based on an SIR model) for input to queuing/forecasting models. 
 
 It also generate values for the number of available healthcare resources, which deplete in proportion to the attack rate of the pathogen.
 
+It generates synthetic individualised records for hospital patients.
 
 To install the package, type the following code:
 ```
@@ -17,6 +18,7 @@ Code examples can be seen [here](https://github.com/JimDuggan/epicaser/tree/main
 
 * Initial version February 15th 2024, generated epi cases
 * December 12th 2024, Version 1.1, adding staff as a resource whose availability can be impacted by the disease attack rate
+* May 1st 2025, adding individualisation to model outputs that generate (1) a case list based on SIR model incidence and (2) synthetic hospital data.
 
 ### Project Information
 
