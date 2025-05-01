@@ -40,25 +40,25 @@ generate_hospitalisation_data <- function(
                  gender_prob=c(0.49,0.51),
                  NL=FALSE){
   
-  cat(green("Calling generate_hospitalisation_data to generate synthetic hospital records...\n"))
-  cat(blue("Hospital Risk information\n"))
-  cat(red("\tAge Lower ",paste0(h_risk$AgeL, collapse = "*"),"\n"))
-  cat(red("\tAge Upper ",paste0(h_risk$AgeU, collapse = "*"),"\n"))
-  cat(red("\tHospitalisation Risks ",paste0(h_risk$HRisk, collapse = "*"),"\n"))
+  cat(crayon::green("Calling generate_hospitalisation_data to generate synthetic hospital records...\n"))
+  cat(crayon::blue("Hospital Risk information\n"))
+  cat(crayon::red("\tAge Lower ",paste0(h_risk$AgeL, collapse = "*"),"\n"))
+  cat(crayon::red("\tAge Upper ",paste0(h_risk$AgeU, collapse = "*"),"\n"))
+  cat(crayon::red("\tHospitalisation Risks ",paste0(h_risk$HRisk, collapse = "*"),"\n"))
   
-  cat(blue("Hospital LOS\n"))
-  cat(red("\tAge Lower ",paste0(h_time$AgeL, collapse = "*"),"\n"))
-  cat(red("\tAge Upper ",paste0(h_time$AgeU, collapse = "*"),"\n"))
-  cat(red("\tMean LOS ",paste0(h_time$Mean, collapse = "*"),"\n"))
-  cat(red("\tSD LOS ",paste0(h_time$SD, collapse = "*"),"\n"))
+  cat(crayon::blue("Hospital LOS\n"))
+  cat(crayon::red("\tAge Lower ",paste0(h_time$AgeL, collapse = "*"),"\n"))
+  cat(crayon::red("\tAge Upper ",paste0(h_time$AgeU, collapse = "*"),"\n"))
+  cat(crayon::red("\tMean LOS ",paste0(h_time$Mean, collapse = "*"),"\n"))
+  cat(crayon::red("\tSD LOS ",paste0(h_time$SD, collapse = "*"),"\n"))
   
-  cat(blue("Processing Updates...\n"))
+  cat(crayon::blue("Processing Updates...\n"))
           
   counter <- 1 
-  cat(red("\t Processing EPI case",counter,"...\n"))
+  cat(crayon::red("\t Processing EPI case",counter,"...\n"))
   get_risk <- function(age){
     if(counter %% 2500 == 0)
-       cat(red("\t Processing EPI case",counter,"...\n"))
+       cat(crayon::red("\t Processing EPI case",counter,"...\n"))
     counter <<- counter + 1
     dplyr::filter(h_risk,age>=AgeL,age<AgeU) %>% dplyr::pull(HRisk)
   }
@@ -97,8 +97,8 @@ generate_hospitalisation_data <- function(
                                   geslacht=Gender)
   
   prop_h <- round(nrow(hosp_cases)/nrow(epi_cases),3)
-  cat(blue("Completed hospital data generation...\n"))
-  cat(blue("Epi Cases= ",nrow(epi_cases),"Hospital Cases = ",nrow(hosp_cases),"Prop = ",prop_h,"\n"))
+  cat(crayon::blue("Completed hospital data generation...\n"))
+  cat(crayon::blue("Epi Cases= ",nrow(epi_cases),"Hospital Cases = ",nrow(hosp_cases),"Prop = ",prop_h,"\n"))
   
   hosp_cases
 }

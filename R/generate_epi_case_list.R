@@ -17,7 +17,7 @@ library(crayon)
 generate_epi_case_list <- function(cohort_data,
                                    TS=FALSE){
   
-  cat(green("Calling generate_epi_case_list create an individual case list...\n"))
+  cat(crayon::green("Calling generate_epi_case_list create an individual case list...\n"))
   
   case_list <- dplyr::tibble(CaseID=integer(),
                              CohortGroup = character(),
@@ -51,7 +51,7 @@ generate_epi_case_list <- function(cohort_data,
     age_u        <- dplyr::pull(case_data[i,"AgeU"])
     
 
-    cat(red("\tProcessing Day number ",index,"Number of cases generated", case_id,"...\n"))
+    cat(crayon::red("\tProcessing Day number ",index,"Number of cases generated", case_id,"...\n"))
     
     for(j in 1:n_cases){
       case_list <- dplyr::add_row(case_list,

@@ -35,9 +35,9 @@ generate_cohort_epi_cases <- function(dates,
                                       setSeed=F, 
                                       seedValue=100){
   
-  cat(green("Calling generate_cohort_epi_cases to stratify incidence by age cohort...\n"))
-  cat(blue("\tGroups ",paste0(groups, collapse = "*"),"\n"))
-  cat(red("\tProbs ",paste0(probs, collapse = "*"),"\n"))
+  cat(crayon::green("Calling generate_cohort_epi_cases to stratify incidence by age cohort...\n"))
+  cat(crayon::blue("\tGroups ",paste0(groups, collapse = "*"),"\n"))
+  cat(crayon::red("\tProbs ",paste0(probs, collapse = "*"),"\n"))
 
   
   cases_cohort <- p2synthr::synth1(cases,

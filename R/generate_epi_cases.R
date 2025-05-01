@@ -41,7 +41,7 @@ generate_epi_cases <- function(N=100000,
                                staff_absenteeism=0.02){
   
   
-  cat(green("Calling generate_epi_cases to run SIR model and generate data...\n"))
+  cat(crayon::green("Calling generate_epi_cases to run SIR model and generate data...\n"))
   sim <- run_sim_sirm(N=N,
                       R0=R0,
                       I0=I0,
