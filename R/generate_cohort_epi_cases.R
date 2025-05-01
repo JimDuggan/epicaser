@@ -30,8 +30,8 @@ generate_cohort_epi_cases <- function(dates,
                                               0.20,
                                               0.20,
                                               0.25,
-                                              0.15,
-                                              0.05),
+                                              0.19,
+                                              0.01),
                                       setSeed=F, 
                                       seedValue=100){
   
