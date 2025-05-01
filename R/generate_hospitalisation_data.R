@@ -23,12 +23,12 @@ library(crayon)
 
 generate_hospitalisation_data <- function(
                   epi_cases,
-                  h_risk=tibble(AgeL=c(0,30,70),
+                  h_risk=dplyr::tibble(AgeL=c(0,30,70),
                                 AgeU=c(30,70,111),
                                 HRisk=c(0.01,0.05,0.15)),
                  time_to_admit_mean=5.2,
                  time_to_admit_sd=2.1,
-                 h_time=tibble(AgeL=c(0,30,70),
+                 h_time=dplyr::tibble(AgeL=c(0,30,70),
                                AgeU=c(30,70,111),
                                Mean=c(5,10,20),
                                SD=c(1,2,5)),
@@ -60,17 +60,17 @@ generate_hospitalisation_data <- function(
     if(counter %% 2500 == 0)
        cat(red("\t Processing EPI case",counter,"...\n"))
     counter <<- counter + 1
-    filter(h_risk,age>=AgeL,age<AgeU) %>% pull(HRisk)
+    dplyr::filter(h_risk,age>=AgeL,age<AgeU) %>% dplyr::pull(HRisk)
   }
   
   get_hospital_time <- function(age){
-    ht <- filter(h_time,age>=AgeL,age<AgeU)
+    ht <- dplyr::filter(h_time,age>=AgeL,age<AgeU)
     rnorm(1,ht$Mean,ht$SD)
   }
   
   hosp_cases <- epi_cases %>%
-                 rowwise() %>%
-                 mutate(HRisk=get_risk(Age),
+                 dplyr::rowwise() %>%
+                 dplyr::mutate(HRisk=get_risk(Age),
                         Hospitalised=as.logical(rbinom(1,1,HRisk)),
                         TimeToAdmit=as.integer(ifelse(Hospitalised,rnorm(1,
                                                               time_to_admit_mean,
@@ -81,20 +81,20 @@ generate_hospitalisation_data <- function(
                         Source=ifelse(Hospitalised,sample(sources,1,prob=source_prob),NA),
                         Destination=ifelse(Hospitalised,sample(destinations,1,prob=destination_prob),NA),
                         Gender=ifelse(Hospitalised,sample(gender,1,prob=gender_prob),NA),) %>%
-                rename(DateTestedPositive=Date) %>%
-                select(CaseID,Source,Destination,DateAdmitted,DateDischarged,Age,Gender,everything()) %>%
-                filter(Hospitalised==TRUE)
+                dplyr::rename(DateTestedPositive=Date) %>%
+                dplyr::select(CaseID,Source,Destination,DateAdmitted,DateDischarged,Age,Gender,everything()) %>%
+                dplyr::filter(Hospitalised==TRUE)
   
   
   if(NL==TRUE)
     hosp_cases <- hosp_cases %>%
-                    rename(Opname=CaseID,
-                    Herkomst=Source,
-                    Bestemming=Destination,
-                    startdatumtijd=DateAdmitted,
-                    einddatumtijd=DateDischarged,
-                    Leeftijd=Age,
-                    geslacht=Gender)
+                    dplyr::rename(Opname=CaseID,
+                                  Herkomst=Source,
+                                  Bestemming=Destination,
+                                  startdatumtijd=DateAdmitted,
+                                  einddatumtijd=DateDischarged,
+                                  Leeftijd=Age,
+                                  geslacht=Gender)
   
   prop_h <- round(nrow(hosp_cases)/nrow(epi_cases),3)
   cat(blue("Completed hospital data generation...\n"))

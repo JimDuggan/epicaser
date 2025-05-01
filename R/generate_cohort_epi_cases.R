@@ -45,7 +45,7 @@ generate_cohort_epi_cases <- function(dates,
                          group_prob=probs,
                          setSeed = setSeed,
                          seedValue = seedValue) |>
-                  mutate(Date=dates) |>
-                  select(Date,Index,everything())
+                  dplyr::mutate(Date=dates) |>
+                  dplyr::select(Date,Index,everything())
   
 }
