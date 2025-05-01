@@ -40,11 +40,11 @@ generate_cohort_epi_cases <- function(dates,
   cat(red("\tProbs ",paste0(probs, collapse = "*"),"\n"))
 
   
-  cases_cohort <- synth1(cases,
-                         group_names=groups,
-                         group_prob=probs,
-                         setSeed = setSeed,
-                         seedValue = seedValue) |>
+  cases_cohort <- p2synthr::synth1(cases,
+                                   group_names=groups,
+                                   group_prob=probs,
+                                   setSeed = setSeed,
+                                   seedValue = seedValue) |>
                   dplyr::mutate(Date=dates) |>
                   dplyr::select(Date,Index,everything())
   
