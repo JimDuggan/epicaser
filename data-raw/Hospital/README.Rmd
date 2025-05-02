@@ -51,14 +51,14 @@ ggplot(cases_tidy,aes(x=Date,y=Incidence,fill=Age))+
   geom_area()+ggtitle("Synthetic Data")
 ```
 
-Now, we generate a case list. This generates outputs showing the progress as synthetic data is created for each individual.
+Now, we generate an epi case list. This generates outputs showing the progress as synthetic data is created for each individual. It shows the date when each individual was infected (effectively it is an epi line list, with no contact tracing information).
 
 ```{r}
 epi_cases <- generate_epi_case_list(cases_age)
 epi_cases
 ```
 
-We can double-check the summaries to ensure they match the aggregated values. We can see that two 80-99 year olds were infected on the 5th, and this tallies with teh early age cohort stratification.
+We can double-check the summaries to ensure they match the aggregated values. 
 ```{r}
 # Check summaries
 epi_sum <- epi_cases %>% 
