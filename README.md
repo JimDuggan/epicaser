@@ -10,7 +10,11 @@ To install the package, type the following code:
 devtools::install_github("JimDuggan/epicaser")
 ```
 
-To see how to use the package, [click here](https://github.com/JimDuggan/epicaser/tree/main/data-raw)
+To see how to use the package for:
+
+* generating epi cases, [click here](https://github.com/JimDuggan/epicaser/tree/main/data-raw/Epi)
+
+* generating hospital (individual) cases, [click here](https://github.com/JimDuggan/epicaser/tree/main/data-raw/Hospital)
 
 Code examples can be seen [here](https://github.com/JimDuggan/epicaser/tree/main/inst)
 

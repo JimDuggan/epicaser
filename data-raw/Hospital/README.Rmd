@@ -1,0 +1,106 @@
+---
+output: github_document
+title:  Showing how to generate cases and staff numbers
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+The first step (after installing the package) is to load the library `epicaser` and the `tidyverse`
+
+```{r,echo=T,message=FALSE}
+library(epicaser)
+library(tidyverse)
+```
+
+
+Use the function `generate_epi_cases()` to generate synthetic data for cases. Here we use the negative binomial distribution. 
+
+```{r,echo=T}
+cases <- generate_epi_cases(Poisson = FALSE,rep_fraction = .3)
+cases
+```
+
+Plot the cases
+
+```{r}
+ggplot(cases,aes(x=Date,y=Cases))+
+  geom_line()+
+  geom_point()+
+  geom_line(aes(y=Model),colour="red")+
+  scale_x_date(date_breaks = "1 week", minor_breaks = "1 day",date_labels="%b %e")
+```
+
+Next, we stratify these results into age cohorts, using the default (this can be changed).
+
+```{r}
+cases_age <- generate_cohort_epi_cases(cases$Date,cases$Cases)
+cases_age
+```
+
+We can display these stratified cohorts in the following chart
+
+```{r}
+cases_tidy <- cases_age |>
+                pivot_longer(names_to="Age",
+                             values_to="Incidence",
+                             `00-19`:`100-110`)
+
+ggplot(cases_tidy,aes(x=Date,y=Incidence,fill=Age))+
+  geom_area()+ggtitle("Synthetic Data")
+```
+
+Now, we generate a case list. This generates outputs showing the progress as synthetic data is created for each individual.
+
+```{r}
+epi_cases <- generate_epi_case_list(cases_age)
+epi_cases
+```
+
+We can double-check the summaries to ensure they match the aggregated values. We can see that two 80-99 year olds were infected on the 5th, and this tallies with teh early age cohort stratification.
+```{r}
+# Check summaries
+epi_sum <- epi_cases %>% 
+            group_by(Date,CohortGroup) %>%
+            summarise(Cases=n())
+epi_sum
+```
+
+These summaries are plotted.
+
+```{r}
+ggplot(epi_sum,aes(x=Date,y=Cases,fill=CohortGroup))+
+  geom_area()+ggtitle("Check Case List")
+```
+
+Finally, we generate the hospital synthetic data.
+
+```{r}
+hosp_cases <- generate_hospitalisation_data(epi_cases,NL=FALSE)
+hosp_cases
+```
+
+We can then generate summaries and show the admissions and dishcarges on one chart
+
+```{r}
+h_adm_sum <- hosp_cases %>%
+              group_by(DateAdmitted,CohortGroup) %>%
+              summarise(Admissions=n())
+
+h_dis_sum <- hosp_cases %>%
+  group_by(DateDischarged,CohortGroup) %>%
+  summarise(Discharges=n())
+
+ 
+ggplot()+geom_area(data=h_adm_sum,mapping=aes(x=DateAdmitted,y=Admissions,fill=CohortGroup))+
+  geom_area(data=h_dis_sum,mapping=aes(x=DateDischarged,y=Discharges,fill=CohortGroup))+
+  xlab("Date")+ylab("Admissions and Discharges")
+```
+
+
+A version can also be generated in Dutch.
+```{r}
+hosp_cases_nl <- generate_hospitalisation_data(epi_cases,NL=TRUE)
+hosp_cases_nl
+```
