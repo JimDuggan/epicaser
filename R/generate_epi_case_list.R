@@ -19,12 +19,12 @@ generate_epi_case_list <- function(cohort_data,
   
   cat(crayon::green("Calling generate_epi_case_list create an individual case list...\n"))
   
-  case_list <- dplyr::tibble(CaseID=integer(),
-                             CohortGroup = character(),
-                             Index = integer(),
-                             Age = integer(),
-                             SynGenTime=character())
-  
+  # case_list <- dplyr::tibble(CaseID=integer(),
+  #                            CohortGroup = character(),
+  #                            Index = integer(),
+  #                            Age = integer(),
+  #                            SynGenTime=character())
+  # 
 
   make_longer <-  names(cohort_data)[!(names(cohort_data) %in% c("Date","Index","Input"))]
   
@@ -42,6 +42,13 @@ generate_epi_case_list <- function(cohort_data,
   
   case_id <- 1
   
+  vCaseID      <- vector(mode="integer",   length = sum(cohort_data$Input))
+  vCohortGroup <- vector(mode="character", length = sum(cohort_data$Input))
+  vIndex       <- vector(mode="integer",   length = sum(cohort_data$Input))
+  vAge         <- vector(mode="integer",   length = sum(cohort_data$Input))
+  vSynGenTime  <- vector(mode="character", length = sum(cohort_data$Input))
+  
+  
   for(i in 1:nrow(case_data)){
     # Extract row data that is needed
     n_cases      <- dplyr::pull(case_data[i,"Cases"])
@@ -49,20 +56,37 @@ generate_epi_case_list <- function(cohort_data,
     cohort_group <- dplyr::pull(case_data[i,"CohortGroup"])
     age_l        <- dplyr::pull(case_data[i,"AgeL"])
     age_u        <- dplyr::pull(case_data[i,"AgeU"])
-    
 
-    cat(crayon::red("\tProcessing Day number ",index,"Number of cases generated", case_id,"...\n"))
+
     
     for(j in 1:n_cases){
-      case_list <- dplyr::add_row(case_list,
-                                  CaseID=case_id,
-                                  CohortGroup=cohort_group,
-                                  Index=index,
-                                  Age=sample(age_l:age_u,1),
-                                  SynGenTime=format(Sys.time(), "%a %b %d %X %Y"))
+      # Add in optimised code
+      vCaseID[case_id]      <- case_id
+      vCohortGroup[case_id] <- cohort_group
+      vIndex[case_id]       <- index
+      vAge[case_id]         <- sample(age_l:age_u,1)
+      vSynGenTime[case_id]  <- format(Sys.time(), "%a %b %d %X %Y")
+      
+      # Older code
+      # case_list <- dplyr::add_row(case_list,
+      #                             CaseID=case_id,
+      #                             CohortGroup=cohort_group,
+      #                             Index=index,
+      #                             Age=sample(age_l:age_u,1),
+      #                             SynGenTime=format(Sys.time(), "%a %b %d %X %Y"))
      case_id <- case_id + 1
+     
+     if (case_id %% 2500 == 0)
+       cat(crayon::red("\tNumber of cases generated", case_id,"...\n"))
     }
   }
+  
+  case_list <- dplyr::tibble(CaseID=vCaseID,
+                             CohortGroup = vCohortGroup,
+                             Index = vIndex,
+                             Age =  vAge,
+                             SynGenTime=vSynGenTime)
+  
   
   date_join <- case_data %>%
                 dplyr::select(Date,Index) %>%
