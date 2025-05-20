@@ -2,10 +2,10 @@
 % Please edit documentation in R/generate_epi_case_list.R
 \name{generate_epi_case_list}
 \alias{generate_epi_case_list}
-\title{Takes a time series of cases and randomly splits into groups
-Groups and proportions are provided as inputs}
+\title{Creates an individual list of cases based on the input cohorts. 
+This structure will then form the basis for the hospitalisation structure}
 \usage{
-generate_epi_case_list(cohort_data, TS = FALSE, VERBOSE = FALSE)
+generate_epi_case_list(cohort_data, TS = FALSE)
 }
 \arguments{
 \item{cohort_data}{Cohort case data via SIR model and age cohort breakdown}

@@ -10,7 +10,7 @@ generate_cohort_epi_cases(
   dates,
   cases,
   groups = c("00-19", "20-39", "40-59", "60-79", "80-99", "100-110"),
-  probs = c(0.15, 0.2, 0.2, 0.25, 0.15, 0.05),
+  probs = c(0.15, 0.2, 0.2, 0.25, 0.19, 0.01),
   setSeed = F,
   seedValue = 100
 )

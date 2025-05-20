@@ -6,12 +6,12 @@
 \usage{
 generate_hospitalisation_data(
   epi_cases,
-  h_risk = tibble(AgeL = c(0, 30, 70), AgeU = c(30, 70, 111), HRisk = c(0.01, 0.05,
-    0.15)),
+  h_risk = dplyr::tibble(AgeL = c(0, 30, 70), AgeU = c(30, 70, 111), HRisk = c(0.01,
+    0.05, 0.15)),
   time_to_admit_mean = 5.2,
-  time_to_admit_sd = 1.1,
-  h_time = tibble(AgeL = c(0, 30, 70), AgeU = c(30, 70, 111), Mean = c(5, 10, 20), SD =
-    c(1, 2, 5)),
+  time_to_admit_sd = 2.1,
+  h_time = dplyr::tibble(AgeL = c(0, 30, 70), AgeU = c(30, 70, 111), Mean = c(5, 10, 20),
+    SD = c(1, 2, 5)),
   sources = c("Home", "Hospital", "Other"),
   source_prob = c(0.8, 0.1, 0.1),
   destinations = c("Home", "Hospital", "Death"),

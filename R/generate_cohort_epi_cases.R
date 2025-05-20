@@ -1,5 +1,4 @@
 library(tidyverse)
-library(p2synthr)
 library(crayon)
 
 #-------------------------------------------------------------------------------------
@@ -40,7 +39,7 @@ generate_cohort_epi_cases <- function(dates,
   cat(crayon::red("\tProbs ",paste0(probs, collapse = "*"),"\n"))
 
   
-  cases_cohort <- p2synthr::synth1(cases,
+  cases_cohort <- epicaser::synth1(cases,
                                    group_names=groups,
                                    group_prob=probs,
                                    setSeed = setSeed,

@@ -13,7 +13,7 @@ generate_epi_cases(
   res_policy = FALSE,
   res_duration = 7,
   end_time = 100,
-  start_day = "2024-03-01",
+  start_day = "2025-03-01",
   seed = FALSE,
   seed_val = 100,
   Poisson = TRUE,
