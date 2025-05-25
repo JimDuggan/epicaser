@@ -1,4 +1,4 @@
-library(tidyverse)
+library(dplyr)
 library(crayon)
 
 #-------------------------------------------------------------------------------------
@@ -45,6 +45,6 @@ generate_cohort_epi_cases <- function(dates,
                                    setSeed = setSeed,
                                    seedValue = seedValue) |>
                   dplyr::mutate(Date=dates) |>
-                  dplyr::select(Date,Index,everything())
+                  dplyr::select(Date,Index,dplyr::everything())
   
 }

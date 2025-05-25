@@ -1,2 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^RAPIDE.png$
+^LICENSE\.md$
+^data-raw$

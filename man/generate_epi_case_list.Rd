@@ -5,14 +5,23 @@
 \title{Creates an individual list of cases based on the input cohorts. 
 This structure will then form the basis for the hospitalisation structure}
 \usage{
-generate_epi_case_list(cohort_data, TS = FALSE)
+generate_epi_case_list(
+  cohort_data,
+  TS = FALSE,
+  set_seed = FALSE,
+  seed_val = 100
+)
 }
 \arguments{
 \item{cohort_data}{Cohort case data via SIR model and age cohort breakdown}
+
+\item{TS}{Flag when true timestamps the synthetic data generated}
+
+\item{set_seed}{allows setting of the seed for sampling}
+
+\item{seed_val}{set the seed value to be used if needed}
 }
 \value{
-tibble with results, including original value. Each group has a column.
-
 res a tibble with day number, date, model output, cases, and available staff
 }
 \description{

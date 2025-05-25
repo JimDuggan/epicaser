@@ -59,8 +59,8 @@ synth1<- function(ts_data, group_names, group_prob, setSeed=F, seedValue=100){
   }
   
   out_t <- tibble::as_tibble(d) |>
-    mutate(Index=1:length(ts_data)) |>
-    select(Index,everything())
+    dplyr::mutate(Index=1:length(ts_data)) |>
+    dplyr::select(Index,dplyr::everything())
   
   out_t
   

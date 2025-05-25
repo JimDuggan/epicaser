@@ -9,18 +9,16 @@ generate_epi_cases(
   N = 1e+05,
   R0 = 2,
   I0 = 1,
-  rep_fraction = 0.5,
-  res_policy = FALSE,
-  res_duration = 7,
+  RF = 0.5,
+  sigma = 0.5,
+  gamma = 0.5,
+  start_time = 0,
   end_time = 100,
   start_day = "2025-03-01",
   seed = FALSE,
   seed_val = 100,
   Poisson = TRUE,
-  nb_size = 10,
-  staff_per_100K = 1200,
-  staff_recovery_delay = 6,
-  staff_absenteeism = 0.02
+  nb_size = 10
 )
 }
 \arguments{
@@ -30,11 +28,13 @@ generate_epi_cases(
 
 \item{I0}{the initial number of people infected (default 1)}
 
-\item{rep_fraction}{Reporting fraction for surveillance (default 0.5)}
+\item{RF}{Reporting fraction for surveillance (default 0.5)}
 
-\item{res_policy}{Whether or not to activate a simple restrictions policy (default FALSE)}
+\item{sigma}{Inverse of exposure delay}
 
-\item{res_duration}{Duration for restrictions (default 7)}
+\item{gamma}{Inverse of infectious delay}
+
+\item{start_time}{start of simulation time (default 0)}
 
 \item{end_time}{end of simulation time (default 100)}
 
@@ -44,13 +44,9 @@ generate_epi_cases(
 
 \item{seed_val}{value of seed (default 100)}
 
+\item{Poisson}{Signifies whether to use the Poisson distribution synthetic data creation}
+
 \item{nb_size}{size parameter for negative binomial distribution (default 10)}
-
-\item{staff_per_100K}{number of staff resources per 100K of population}
-
-\item{staff_recovery_delay}{average recovery time for absent staff}
-
-\item{staff_absenteeism}{average absenteeism rate for staff}
 }
 \value{
 res a tibble with day number, date, model output, cases, and available staff

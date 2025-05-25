@@ -8,7 +8,7 @@ generate_hospitalisation_data(
   epi_cases,
   h_risk = dplyr::tibble(AgeL = c(0, 30, 70), AgeU = c(30, 70, 111), HRisk = c(0.01,
     0.05, 0.15)),
-  time_to_admit_mean = 5.2,
+  time_to_admit_mean = 7,
   time_to_admit_sd = 2.1,
   h_time = dplyr::tibble(AgeL = c(0, 30, 70), AgeU = c(30, 70, 111), Mean = c(5, 10, 20),
     SD = c(1, 2, 5)),
@@ -18,7 +18,9 @@ generate_hospitalisation_data(
   destination_prob = c(0.85, 0.13, 0.02),
   gender = c("M", "F"),
   gender_prob = c(0.49, 0.51),
-  NL = FALSE
+  NL = FALSE,
+  set_seed = FALSE,
+  seed_val = 100
 )
 }
 \arguments{
@@ -30,9 +32,15 @@ generate_hospitalisation_data(
 
 \item{time_to_admit_sd}{The standard deviation for the average time}
 
+\item{h_time}{Length of stay distribution information (normal distribution)}
+
 \item{sources}{A vectors showing where the patient has come from before arriving at the hospital}
 
+\item{source_prob}{The probability of each sourcing option}
+
 \item{destinations}{Where the patient goes after their length of stay}
+
+\item{destination_prob}{The probability of going to a destination}
 
 \item{gender}{Gender of the patient}
 
@@ -40,9 +48,9 @@ generate_hospitalisation_data(
 
 \item{NL}{Netherlands flag, causes key fields to be renamed.}
 
-\item{htime}{Length of stay distribution information (normal distribution)}
+\item{set_seed}{allows setting of the seed for sampling}
 
-\item{sources_prob}{The probability of each sourcing option}
+\item{seed_val}{set the seed value to be used if needed}
 }
 \value{
 hosp_cases A tibble with all hospitalisation data

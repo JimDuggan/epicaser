@@ -9,13 +9,22 @@ Authors@R:
            email = "jim.duggan@universityofgalway.ie",
            comment = c(ORCID = "0000-0002-7507-8617"))
 Maintainer: The package maintainer <jim.duggan@universityofgalway.ie>
-Description: Utility to support model integration activities in RAPIDE project
-License: MIT
+Description: A utility to generate cases and hospitalisations data.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: dplyr,
-         deSolve,
-         purrr,
-         p2synthr,
-         crayon
+Imports: 
+    crayon,
+    deSolve,
+    dplyr,
+    purrr,
+    tibble,
+    tidyr
 RoxygenNote: 7.3.2
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0),
+    ggplot2
+Config/testthat/edition: 3
+VignetteBuilder: knitr

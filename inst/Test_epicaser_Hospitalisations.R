@@ -3,7 +3,7 @@ library(epicaser)
 library(tidyverse)
 
 # (1) Run SIR model to get case data, specify the measurement model as NB
-cases <- generate_epi_cases(Poisson = FALSE,rep_fraction = .3,N = 1000000,I0 = 100)
+cases <- generate_epi_cases(Poisson = FALSE,RF = .3,N = 100000,I0 = 10)
 
 
 ggplot(cases,aes(x=Date,y=Cases))+
@@ -42,7 +42,7 @@ hosp_cases <- generate_hospitalisation_data(epi_cases,NL=FALSE)
 
 h_adm_sum <- hosp_cases %>%
               group_by(DateAdmitted,CohortGroup) %>%
-              summarise(Admissions=n())50
+              summarise(Admissions=n())
 
 h_dis_sum <- hosp_cases %>%
   group_by(DateDischarged,CohortGroup) %>%

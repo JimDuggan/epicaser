@@ -1,4 +1,5 @@
-library(tidyverse)
+library(tidyr)
+library(dplyr)
 library(crayon)
 
 #-------------------------------------------------------------------------------------
@@ -9,15 +10,20 @@ library(crayon)
 #' \code{generate_epi_case_list} Create an epi case list based on model outputs
 #'
 #' @param cohort_data Cohort case data via SIR model and age cohort breakdown
-#' @return tibble with results, including original value. Each group has a column.
+#' @param TS Flag when true timestamps the synthetic data generated
+#' @param set_seed allows setting of the seed for sampling
+#' @param seed_val set the seed value to be used if needed
 #' @return res a tibble with day number, date, model output, cases, and available staff
 #' @export
 
 generate_epi_case_list <- function(cohort_data,
-                                   TS=FALSE){
+                                   TS=FALSE,
+                                   set_seed=FALSE,
+                                   seed_val=100){
   
   cat(crayon::green("Calling generate_epi_case_list create an individual case list...\n"))
   
+  if(set_seed == TRUE) set.seed(seed_val)
   # case_list <- dplyr::tibble(CaseID=integer(),
   #                            CohortGroup = character(),
   #                            Index = integer(),
@@ -93,7 +99,7 @@ generate_epi_case_list <- function(cohort_data,
   
   if (TS == FALSE) case_list$SynGenTime <- NULL
   final_case_list <- dplyr::left_join(case_list,date_join) %>%
-                        dplyr::select(Date,CaseID,Age,CohortGroup,everything()) %>%
+                        dplyr::select(Date,CaseID,Age,CohortGroup,dplyr::everything()) %>%
                         dplyr::select(-Index)
       
 }
