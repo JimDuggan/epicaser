@@ -1,9 +1,10 @@
 # devtools::install_github("JimDuggan/epicaser")
 library(epicaser)
 library(tidyverse)
+library(ggplot2)
 
 # (1) Run SIR model to get case data, specify the measurement model as NB
-cases <- generate_epi_cases(Poisson = FALSE,RF = .3,N = 100000,I0 = 10)
+cases <- generate_epi_cases(Poisson = FALSE,RF = .3,N = 10000,I0 = 10)
 
 
 ggplot(cases,aes(x=Date,y=Cases))+
@@ -37,22 +38,25 @@ ggplot(epi_sum,aes(x=Date,y=Cases,fill=CohortGroup))+
 
 
 # (4) Generate hospital list
-hosp_cases <- generate_hospitalisation_data(epi_cases,NL=FALSE)
+# hosp_cases <- generate_hospitalisation_data(epi_cases,NL=FALSE)
+arrivals <- generate_hospital_arrivals(epi_cases)
+
+pathways <- generate_patient_pathways(arrivals)
 
 
-h_adm_sum <- hosp_cases %>%
-              group_by(DateAdmitted,CohortGroup) %>%
-              summarise(Admissions=n())
-
-h_dis_sum <- hosp_cases %>%
-  group_by(DateDischarged,CohortGroup) %>%
-  summarise(Discharges=n())
-
- 
-ggplot()+geom_area(data=h_adm_sum,mapping=aes(x=DateAdmitted,y=Admissions,fill=CohortGroup))+
-  geom_area(data=h_dis_sum,mapping=aes(x=DateDischarged,y=Discharges,fill=CohortGroup))+
-  xlab("Date")+ylab("Admissions and Discharges")
-
+# h_adm_sum <- hosp_cases %>%
+#               group_by(DateAdmitted,CohortGroup) %>%
+#               summarise(Admissions=n())
+# 
+# h_dis_sum <- hosp_cases %>%
+#   group_by(DateDischarged,CohortGroup) %>%
+#   summarise(Discharges=n())
+# 
+#  
+# ggplot()+geom_area(data=h_adm_sum,mapping=aes(x=DateAdmitted,y=Admissions,fill=CohortGroup))+
+#   geom_area(data=h_dis_sum,mapping=aes(x=DateDischarged,y=Discharges,fill=CohortGroup))+
+#   xlab("Date")+ylab("Admissions and Discharges")
+# 
 
 
 

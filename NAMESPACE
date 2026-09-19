@@ -3,5 +3,8 @@
 export(generate_cohort_epi_cases)
 export(generate_epi_case_list)
 export(generate_epi_cases)
+export(generate_hospital_arrivals)
 export(generate_hospitalisation_data)
+export(generate_patient_pathways)
+export(generate_timestamp)
 export(synth1)

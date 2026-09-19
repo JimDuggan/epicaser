@@ -23,6 +23,7 @@ Code examples can be seen [here](https://github.com/JimDuggan/epicaser/tree/main
 * Initial version February 15th 2024, generated epi cases
 * December 12th 2024, Version 1.1, adding staff as a resource whose availability can be impacted by the disease attack rate
 * May 1st 2025, adding individualisation to model outputs that generate (1) a case list based on SIR model incidence and (2) synthetic hospital data.
+* September 21st 2026, creating patient pathways as part of output
 
 ### Project Information
 

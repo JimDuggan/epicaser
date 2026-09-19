@@ -1,35 +1,25 @@
 ---
-title: "epicaser"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{epicaser}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output: github_document
+title:  Showing how to generate patient pathway information
 ---
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
 ```
+
 The first step (after installing the package) is to load the library `epicaser` and the `tidyverse`
 
 ```{r,echo=T,message=FALSE}
 library(epicaser)
-library(dplyr)
-library(tidyr)
-library(ggplot2)
+library(tidyverse)
 ```
 
 
 Use the function `generate_epi_cases()` to generate synthetic data for cases. Here we use the negative binomial distribution. 
 
 ```{r,echo=T}
-cases <- generate_epi_cases(Poisson = FALSE,RF = .3)
+cases <- generate_epi_cases(Poisson = FALSE,rep_fraction = .3)
 cases
 ```
-
 
 Plot the cases
 
@@ -83,38 +73,9 @@ ggplot(epi_sum,aes(x=Date,y=Cases,fill=CohortGroup))+
   geom_area()+ggtitle("Check Case List")
 ```
 
-Finally, we generate the hospital synthetic data.
+Next we generate the hospital synthetic data. There are two steps. First, we generate the arrival information.
 
 ```{r}
-hosp_cases <- generate_hospitalisation_data(epi_cases,NL=FALSE)
-hosp_cases
-```
-
-We can then generate summaries and show the admissions and dishcarges on one chart
-
-```{r}
-h_adm_sum <- hosp_cases %>%
-              group_by(DateAdmitted,CohortGroup) %>%
-              summarise(Admissions=n())
-
-h_dis_sum <- hosp_cases %>%
-  group_by(DateDischarged,CohortGroup) %>%
-  summarise(Discharges=n())
-
- 
-```
-
-We can plot the admissions and discharge data.
-
-```{r}
-ggplot()+
-  geom_area(data=h_adm_sum,mapping=aes(x=DateAdmitted,y=Admissions,fill=CohortGroup))+
-  geom_area(data=h_dis_sum,mapping=aes(x=DateDischarged,y=Discharges,fill=CohortGroup))+
-  xlab("Date")+ylab("Admissions and Discharges")
-```
-
-A version can also be generated in Dutch.
-```{r}
-hosp_cases_nl <- generate_hospitalisation_data(epi_cases,NL=TRUE)
-hosp_cases_nl
+arrivals <- generate_hospital_arrivals(epi_cases)
+arrivals
 ```

@@ -31,6 +31,11 @@ globalVariables(c("AgeL",
                   "Gender",
                   "time",
                   "TI",
-                  "C"
+                  "C",
+                  "TimeAdmitted",
+                  "DurationDays",
+                  "StartTime",
+                  "EndTime",
+                  "POSIXct"
                   ))
 

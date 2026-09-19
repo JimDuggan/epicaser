@@ -11,5 +11,10 @@ A utility to generate cases and hospitalisations data.
 \author{
 \strong{Maintainer}: Jim Duggan \email{jim.duggan@universityofgalway.ie} (\href{https://orcid.org/0000-0002-7507-8617}{ORCID})
 
+Authors:
+\itemize{
+  \item Jim Duggan \email{jim.duggan@universityofgalway.ie} (\href{https://orcid.org/0000-0002-7507-8617}{ORCID})
+}
+
 }
 \keyword{internal}
