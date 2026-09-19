@@ -16,6 +16,8 @@ To see how to use the package for:
 
 * generating hospital (individual) cases, [click here](https://github.com/JimDuggan/epicaser/tree/main/data-raw/Hospital)
 
+* generating patient pathways, [click here](https://github.com/JimDuggan/epicaser/tree/main/data-raw/Pathways)
+
 Code examples can be seen [here](https://github.com/JimDuggan/epicaser/tree/main/inst)
 
 ### Change history
