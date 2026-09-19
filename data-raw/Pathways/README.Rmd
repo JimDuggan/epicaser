@@ -17,7 +17,7 @@ library(tidyverse)
 Use the function `generate_epi_cases()` to generate synthetic data for cases. Here we use the negative binomial distribution. 
 
 ```{r,echo=T}
-cases <- generate_epi_cases(Poisson = FALSE,rep_fraction = .3)
+cases <- generate_epi_cases(Poisson = FALSE,RF = .3,N = 10000,I0 = 10)
 cases
 ```
 
@@ -78,4 +78,22 @@ Next we generate the hospital synthetic data. There are two steps. First, we gen
 ```{r}
 arrivals <- generate_hospital_arrivals(epi_cases)
 arrivals
+```
+
+We can show all the columns for arrivals:
+
+```{r}
+glimpse(arrivals)
+```
+
+Lastly, we generate the patient pathways. The default function parameters show how the data is configured.
+```{r}
+pathways <- generate_patient_pathways(arrivals)
+pathways
+```
+
+We can show all the columns for pathways:
+
+```{r}
+glimpse(pathways)
 ```
