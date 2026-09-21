@@ -4,14 +4,19 @@ library(tidyverse)
 library(ggplot2)
 
 # (1) Run SIR model to get case data, specify the measurement model as NB
-cases <- generate_epi_cases(Poisson = FALSE,RF = .3,N = 10000,I0 = 10)
+# cases <- generate_epi_cases(Poisson = FALSE,RF = .3,N = 10000,I0 = 10)
+
+# Only call to run a model. If model is already run, read in from CSV and
+# go straight to generate_epi_cases_stochastic()
 cases_d <- generate_epi_cases_deterministic(RF = .3,N = 10000,I0 = 10)
+
+cases   <- generate_epi_cases_stochastic(cases_d,Poisson=FALSE)
 
 
 ggplot(cases,aes(x=Date,y=Cases))+
   geom_line()+
   geom_point()+
-  geom_line(aes(y=Model),colour="red")+
+  # geom_line(aes(y=Model),colour="red")+
   scale_x_date(date_breaks = "1 week", minor_breaks = "1 day",date_labels="%b %e")
 
 

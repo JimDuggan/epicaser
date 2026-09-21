@@ -21,20 +21,20 @@ generate_epi_cases_stochastic <- function(model_cases,
                                           seed_val=100,
                                           Poisson=TRUE,
                                           nb_size=10){
-  
+
   cat(crayon::green("Calling generate_epi_cases_stochastic to generate data...\n"))
 
   if(seed)
     set.seed(seed_val)
 
   if(Poisson)
-     syn_cases <- purrr::map_dbl(model_cases$Model,~rpois(1,lambda = .x))
+     syn_cases <- purrr::map_dbl(model_cases$Cases,~rpois(1,lambda = .x))
   else
-     syn_cases <- purrr::map_dbl(model_cases$Model,~rnbinom(1,mu=.x,size=nb_size))
+     syn_cases <- purrr::map_dbl(model_cases$Cases,~rnbinom(1,mu=.x,size=nb_size))
   
   day_1 <- as.Date(start_day)
 
-  res <- tibble::tibble(Date=day_1+(Day-1),
+  res <- tibble::tibble(Date=day_1+(model_cases$Day-1),
                         Cases=syn_cases)
 
   

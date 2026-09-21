@@ -39,7 +39,7 @@ generate_epi_cases_deterministic <- function(N=100000,
 
 
   res <- tibble::tibble(Day=1:nrow(sim),
-                        Model=sim$DI)
+                        Cases=sim$DI)
   
   res
 
