@@ -5,6 +5,7 @@ library(ggplot2)
 
 # (1) Run SIR model to get case data, specify the measurement model as NB
 cases <- generate_epi_cases(Poisson = FALSE,RF = .3,N = 10000,I0 = 10)
+cases_d <- generate_epi_cases_deterministic(RF = .3,N = 10000,I0 = 10)
 
 
 ggplot(cases,aes(x=Date,y=Cases))+
