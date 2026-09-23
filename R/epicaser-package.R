@@ -36,6 +36,8 @@ globalVariables(c("AgeL",
                   "DurationDays",
                   "StartTime",
                   "EndTime",
-                  "POSIXct"
+                  "POSIXct",
+                  "startdatetime",
+                  "enddatetime"
                   ))
 

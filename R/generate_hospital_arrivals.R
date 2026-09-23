@@ -20,7 +20,6 @@ library(crayon)
 #' @return hosp_cases A tibble with all hospitalisation data
 #' @export
 
-
 generate_hospital_arrivals <- function(
                     epi_cases,
                     h_risk=dplyr::tibble(AgeL=c(0,30,70),
@@ -28,8 +27,8 @@ generate_hospital_arrivals <- function(
                                          HRisk=c(0.03,0.08,0.15)),
                     time_to_admit_mean=7,
                     time_to_admit_sd=2.1,
-                    sources=c("Own living environment","Other facility"),
-                    source_prob=c(.80,.20),
+                    sources=c("Home","Other hospital","Nursing home"),
+                    source_prob=c(0.55,0.45,0.05),
                     gender=c("M","F"),
                     gender_prob=c(0.49,0.51),    
                     set_seed=FALSE,

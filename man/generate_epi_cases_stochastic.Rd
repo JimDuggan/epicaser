@@ -15,6 +15,8 @@ generate_epi_cases_stochastic(
 )
 }
 \arguments{
+\item{model_cases}{Output from the infectious disease model}
+
 \item{start_day}{YYYY-MM-DD string format for start of simulation}
 
 \item{seed}{True or False for using a seed (default FALSE)}

@@ -8,7 +8,7 @@ library(ggplot2)
 
 # Only call to run a model. If model is already run, read in from CSV and
 # go straight to generate_epi_cases_stochastic()
-cases_d <- generate_epi_cases_deterministic(RF = .3,N = 10000,I0 = 10)
+cases_d <- generate_epi_cases_deterministic(RF = .5,N = 10000,I0 = 10)
 
 cases   <- generate_epi_cases_stochastic(cases_d,Poisson=FALSE)
 
@@ -47,7 +47,8 @@ ggplot(epi_sum,aes(x=Date,y=Cases,fill=CohortGroup))+
 # hosp_cases <- generate_hospitalisation_data(epi_cases,NL=FALSE)
 arrivals <- generate_hospital_arrivals(epi_cases)
 
-pathways <- generate_patient_pathways(arrivals)
+# pathways <- generate_patient_pathways(arrivals)
+pathways_NL <- generate_patient_pathways_NL(arrivals)
 
 
 # h_adm_sum <- hosp_cases %>%

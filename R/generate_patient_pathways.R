@@ -104,7 +104,7 @@ generate_patient_pathways <- function(
                                           Pathway_Step=j,
                                           Origin=pathway_patient$Destination[j-1],
                                           Destination=process_data$Pathway[j],
-                                          StartTime=pathway_patient$EndTime[j-1]+lubridate::hours(1),
+                                          StartTime=pathway_patient$EndTime[j-1],
                                           EndTime=StartTime+lubridate::hours(process_data$Times[j]),
                                           DurationDays=as.numeric(difftime(EndTime,StartTime,units="days")),
                                           ICU_Admission=process_data$Pathway[j]=="ICU")

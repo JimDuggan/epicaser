@@ -7,6 +7,7 @@ library(dplyr)
 #'
 #' \code{generate_epi_cases_stochastic} Create synthetic case data based on model input
 #'
+#' @param model_cases Output from the infectious disease model
 #' @param start_day YYYY-MM-DD string format for start of simulation
 #' @param seed True or False for using a seed (default FALSE)
 #' @param seed_val value of seed (default 100)
