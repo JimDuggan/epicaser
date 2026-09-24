@@ -62,6 +62,7 @@ generate_patient_pathways_NL <- function(
     index <- sample(1:nrow(pway_rows),1,prob=pway_rows$Probabilities)
     p_way<-unlist(pway_rows$Internal_Pathway[[index]])
     pmean_times<-unlist(pway_rows$Durations[[index]])
+    pmean_times <- rpois(length(pmean_times),pmean_times)
     p_final_dest <- pway_rows$Final_Destination[[index]]
     
     list(Internal_Pathway=p_way,

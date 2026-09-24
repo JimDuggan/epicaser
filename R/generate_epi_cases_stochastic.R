@@ -17,7 +17,7 @@ library(dplyr)
 #' @export
 
 generate_epi_cases_stochastic <- function(model_cases,
-                                          start_day="2025-03-01",
+                                          start_day="2026-09-24",
                                           seed=FALSE,
                                           seed_val=100,
                                           Poisson=TRUE,

@@ -50,20 +50,9 @@ arrivals <- generate_hospital_arrivals(epi_cases)
 # pathways <- generate_patient_pathways(arrivals)
 pathways_NL <- generate_patient_pathways_NL(arrivals)
 
-
-# h_adm_sum <- hosp_cases %>%
-#               group_by(DateAdmitted,CohortGroup) %>%
-#               summarise(Admissions=n())
-# 
-# h_dis_sum <- hosp_cases %>%
-#   group_by(DateDischarged,CohortGroup) %>%
-#   summarise(Discharges=n())
-# 
-#  
-# ggplot()+geom_area(data=h_adm_sum,mapping=aes(x=DateAdmitted,y=Admissions,fill=CohortGroup))+
-#   geom_area(data=h_dis_sum,mapping=aes(x=DateDischarged,y=Discharges,fill=CohortGroup))+
-#   xlab("Date")+ylab("Admissions and Discharges")
-# 
+# Joining epi and hospital dataset for overall information on cases
+dataset_all <- left_join(arrivals,pathways_NL,by=c("CaseID"="admission"),keep = T) %>%
+                 mutate(Duration=difftime(enddatetime,startdatetime,units="days"))
 
 
 
