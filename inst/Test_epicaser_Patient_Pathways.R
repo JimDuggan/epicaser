@@ -57,7 +57,8 @@ ggplot(arr_sum,aes(x=DateAdmitted,y=Cases,fill=CohortGroup))+
   scale_x_date(date_breaks = "1 week", minor_breaks = "1 day",date_labels="%b %e")
 
 # pathways <- generate_patient_pathways(arrivals)
-pathways_NL <- generate_patient_pathways_NL(arrivals)
+# pathways_NL <- generate_patient_pathways_NL(arrivals)
+pathways_NL2 <- generate_patient_pathways_NL2(arrivals)
 
 # Joining epi and hospital dataset for overall information on cases
 dataset_all <- left_join(arrivals,pathways_NL,by=c("CaseID"="admission"),keep = T) %>%

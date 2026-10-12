@@ -13,8 +13,6 @@ library(crayon)
 #' @param seed_val set the seed value to be used if needed
 #' @return  A tibble with the pathways for each patient
 #' @export
-
-
 generate_patient_pathways_NL <- function(
       arrivals,
       pathway_logic=dplyr::tibble(Pathway_ID=c("P1","P2","P3","P4","P5","P6"),
@@ -50,7 +48,7 @@ generate_patient_pathways_NL <- function(
   
   if(set_seed == TRUE) set.seed(seed_val)
   
-  cat(crayon::green("Calling generate_patient_pathways to build process data for patient journeys...\n"))
+  cat(crayon::green("Calling generate_patient_pathways_NL to build process data for patient journeys...\n"))
   cat(crayon::blue("Hospital Pathway Logic\n"))
   
   # This will be a list of tibbles
@@ -126,4 +124,5 @@ generate_patient_pathways_NL <- function(
   } #End of i loop
   
   dplyr::bind_rows(patient_list)
+  
 }
