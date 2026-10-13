@@ -127,6 +127,9 @@ generate_patient_pathways_NL2 <- function(
   
   dplyr::bind_rows(patient_list) %>%
     dplyr::rename(`ICU admittance`=ICU_admittance) %>% 
-    dplyr::mutate(`ICU admittance`=ifelse(`ICU admittance`,"Yes","No"))
+    dplyr::mutate(`ICU admittance`=ifelse(`ICU admittance`,"Yes","No")) %>%
+    dplyr::mutate(startdatetime=as.character(startdatetime)) %>%
+    dplyr::mutate(enddatetime=as.character(enddatetime))
+    
   
 }
